@@ -1,0 +1,24 @@
+{
+    // 可移植的 Cortex-Debug 配置：
+    // - 不在仓库里写死 OpenOCD / GDB 的绝对路径；
+    // - 路径统一以 ${workspaceFolder}（即 led/）为基准；
+    // - OpenOCD 和 arm-none-eabi-gdb 的路径放在 VS Code 用户设置：
+    //   "cortex-debug.openocdPath" / "cortex-debug.armToolchainPath"
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug led (OpenOCD)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/Debug/led.elf",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none"
+        }
+    ]
+}

@@ -4,17 +4,17 @@
 
 #include "libxr.hpp"
 #include "main.h"
+#include "stm32_gpio.hpp"
 #include "stm32_power.hpp"
-#include "stm32_pwm.hpp"
 #include "stm32_timebase.hpp"
 
 using namespace LibXR;
 
 /* User Code Begin 1 */
+
 /* User Code End 1 */
 
 extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim5;
 
 extern "C" void app_main(void)
 {
@@ -26,13 +26,17 @@ extern "C" void app_main(void)
   PlatformInit(static_cast<uint32_t>(Thread::Priority::MEDIUM), 1024);
   static STM32PowerManager power_manager;
 
-  // PWM
-  static STM32PWM pwm_tim5_ch1(&htim5, TIM_CHANNEL_1, false);
+  // GPIO
+  static STM32GPIO led_blue(led_blue_GPIO_Port, led_blue_Pin);
 
   /* User Code Begin 3 */
+  
   while (true)
   {
-    Thread::Sleep(UINT32_MAX);
+    led_blue.Write(true);
+    LibXR::Thread::Sleep(500);
+    led_blue.Write(false);
+    LibXR::Thread::Sleep(500);
   }
   /* User Code End 3 */
 }

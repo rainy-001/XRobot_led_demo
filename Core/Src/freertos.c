@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "app_main.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,7 +35,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+// extern void app_main(void);
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -122,10 +122,12 @@ void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
+   app_main();
   for(;;)
   {
+  
     osDelay(1);
-  }
+  } 
   /* USER CODE END StartDefaultTask */
 }
 
